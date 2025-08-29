@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": ".output/public",
+  "framework": "nuxtjs",
+  "functions": {
+    "server/api/**": {
+      "maxDuration": 30
+    }
+  }
+}
