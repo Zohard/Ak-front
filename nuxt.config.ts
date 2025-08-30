@@ -17,11 +17,6 @@ export default defineNuxtConfig({
     }
   },
   ssr: false,
-  nitro: {
-    output: {
-      dir: 'dist'
-    }
-  },
   typescript: {
     strict: false,
     typeCheck: false
