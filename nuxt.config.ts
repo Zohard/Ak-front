@@ -17,6 +17,11 @@ export default defineNuxtConfig({
     }
   },
   ssr: false,
+  nitro: {
+    prerender: {
+      routes: ['/']
+    }
+  },
   typescript: {
     strict: false,
     typeCheck: false
