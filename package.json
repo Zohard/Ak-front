@@ -2,6 +2,9 @@
   "name": "anime-kun-frontendv2",
   "version": "2.0.0",
   "private": true,
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "build": "nuxt generate",
     "dev": "nuxt dev",
