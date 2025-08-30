@@ -18,8 +18,9 @@ export default defineNuxtConfig({
   },
   ssr: false,
   nitro: {
-    prerender: {
-      routes: ['/']
+    output: {
+      dir: '.output',
+      publicDir: '.output/public'
     }
   },
   typescript: {

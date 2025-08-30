@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "build": "nuxt build && if [ -d '.output/public' ]; then cp -r .output/public dist; elif [ -d '.output' ]; then cp -r .output dist; else echo 'No .output directory found'; fi",
+    "build": "nuxt generate && if [ -d '.output/public' ]; then cp -r .output/public/* dist/; elif [ -d '.output' ]; then cp -r .output/* dist/; else echo 'No build output found'; fi",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
