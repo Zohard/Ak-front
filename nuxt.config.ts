@@ -19,7 +19,7 @@ export default defineNuxtConfig({
   ssr: false,
   nitro: {
     output: {
-      dir: 'public'
+      dir: 'dist'
     }
   },
   typescript: {
