@@ -1,13 +1,19 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  
+  // Modules
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@vueuse/nuxt',
     '@nuxtjs/color-mode'
   ],
+  
+  // CSS
   css: ['~/assets/css/globals.css'],
+  
+  // Runtime config
   runtimeConfig: {
     public: {
       apiBase: process.env.API_BASE_URL || 'http://localhost:3003',
@@ -16,29 +22,38 @@ export default defineNuxtConfig({
       enablePlayground: process.env.ENABLE_PLAYGROUND === 'true'
     }
   },
+  
+  // SPA mode
   ssr: false,
+  
+  // Generate config for SPA
   nitro: {
-    output: {
-      dir: '.output',
-      publicDir: '.output/public'
+    prerender: {
+      routes: ['/']
     }
   },
+  
+  // TypeScript config
   typescript: {
     strict: false,
     typeCheck: false
   },
-  // Removed proxy - using direct API calls with CORS
+  
+  // Dev server config
   devServer: {
     port: 3000,
     host: '0.0.0.0'
   },
+  
+  // Vite config
   vite: {
     server: {
       port: 3000,
       host: '0.0.0.0'
-    },
-    define: {}
+    }
   },
+  
+  // Color mode config
   colorMode: {
     preference: 'system',
     fallback: 'light',
@@ -49,6 +64,8 @@ export default defineNuxtConfig({
     classSuffix: '',
     storageKey: 'nuxt-color-mode'
   },
+  
+  // Components config
   components: {
     global: true,
     dirs: [
@@ -58,6 +75,8 @@ export default defineNuxtConfig({
       '~/components/reviews'
     ]
   },
+  
+  // App config
   app: {
     baseURL: '/',
     buildAssetsDir: '/_nuxt/',
