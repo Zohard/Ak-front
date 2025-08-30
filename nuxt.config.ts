@@ -26,9 +26,9 @@ export default defineNuxtConfig({
   // SPA mode
   ssr: false,
   
-  // Generate config for SPA
+  // Generate config for SPA (static output)
   nitro: {
-    preset: 'vercel',
+    preset: 'static',
     prerender: {
       routes: ['/']
     }
