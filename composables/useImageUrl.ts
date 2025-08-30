@@ -1,7 +1,11 @@
+import { getImageKitUrl, normalizeImagePath, getOptimizedImageKitUrl } from '~/utils/imagekit'
+
 export function useImageUrl() {
   const config = useRuntimeConfig()
+  const { optimizeForConnection } = usePerformance()
+  const performanceConfig = optimizeForConnection()
 
-  const getImageUrl = (imagePath: string, type: 'anime' | 'manga' = 'anime') => {
+  const getImageUrl = (imagePath: string, type: 'anime' | 'manga' = 'anime', useImageKit = true) => {
     if (!imagePath) return null
     
     // Handle different image path formats
@@ -20,7 +24,13 @@ export function useImageUrl() {
       return imagePath.startsWith('//') ? `http:${imagePath}` : `http://${imagePath}`
     }
     
-    // If path already starts with /api/, it's already a complete API path
+    // Use ImageKit for optimized delivery when enabled
+    if (useImageKit) {
+      const normalizedPath = normalizeImagePath(imagePath)
+      return getImageKitUrl(normalizedPath, type)
+    }
+    
+    // Fallback to existing API serving logic
     if (imagePath.startsWith('/api/')) {
       return `${config.public.apiBase}${imagePath}`
     }
@@ -30,6 +40,30 @@ export function useImageUrl() {
     
     // Use NestJS API to serve images (supports dynamic uploads)
     return `${config.public.apiBase}/api/media/serve/${type}/${cleanPath}`
+  }
+
+  const getOptimizedImageUrl = (
+    imagePath: string, 
+    type: 'anime' | 'manga' = 'anime',
+    width?: number,
+    height?: number,
+    useImageKit = true
+  ) => {
+    if (!imagePath) return null
+    
+    if (useImageKit) {
+      const normalizedPath = normalizeImagePath(imagePath)
+      return getOptimizedImageKitUrl(
+        normalizedPath, 
+        type, 
+        width, 
+        height, 
+        performanceConfig.connectionType
+      )
+    }
+    
+    // Fallback to regular URL
+    return getImageUrl(imagePath, type, false)
   }
 
   const getDirectApiUrl = (path: string) => {
@@ -118,6 +152,7 @@ export function useImageUrl() {
 
   return {
     getImageUrl,
+    getOptimizedImageUrl,
     getDirectApiUrl,
     getAvatarUrl,
     getArticleImageUrl,

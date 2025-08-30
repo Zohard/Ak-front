@@ -70,6 +70,8 @@
 </template>
 
 <script setup lang="ts">
+import { getImageKitSrcSet, normalizeImagePath } from '~/utils/imagekit'
+
 interface Props {
   src: string
   alt: string
@@ -113,7 +115,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<Emits>()
 
-const { optimizeImageUrl } = useSEO()
+const { getOptimizedImageUrl } = useImageUrl()
 const { optimizeForConnection } = usePerformance()
 const performanceConfig = optimizeForConnection()
 
@@ -129,27 +131,21 @@ const isIntersecting = ref(false)
 let observer: IntersectionObserver | null = null
 
 const optimizedSrc = computed(() => {
-  // Adjust quality based on connection
-  const quality = performanceConfig.connectionType === 'slow-2g' || performanceConfig.connectionType === '2g' 
-    ? Math.min(props.quality, 70) 
-    : props.quality
-    
-  return optimizeImageUrl(props.src, props.width, props.height, quality)
+  // Use ImageKit optimization with performance-aware settings
+  return getOptimizedImageUrl(props.src, 'anime', props.width, props.height)
 })
 
 const srcset = computed(() => {
   if (!props.width || !props.height) return undefined
   
-  // Generate responsive srcset
-  const baseWidth = props.width
-  const sizes = [1, 1.5, 2] // 1x, 1.5x, 2x
+  // Generate responsive srcset using ImageKit
+  const normalizedPath = normalizeImagePath(props.src)
   
-  return sizes.map(multiplier => {
-    const width = Math.round(baseWidth * multiplier)
-    const height = Math.round(props.height! * multiplier)
-    const url = optimizeImageUrl(props.src, width, height, props.quality)
-    return `${url} ${multiplier}x`
-  }).join(', ')
+  return getImageKitSrcSet(normalizedPath, 'anime', props.width, props.height, {
+    quality: props.quality,
+    format: 'auto',
+    progressive: true
+  })
 })
 
 const setupIntersectionObserver = () => {
