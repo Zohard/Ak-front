@@ -16,7 +16,8 @@ export default defineNuxtConfig({
   // Runtime config
   runtimeConfig: {
     public: {
-      apiBase: process.env.API_BASE_URL || 'http://localhost:3003',
+      // Normalize to avoid trailing slash issues in requests
+      apiBase: (process.env.API_BASE_URL || 'http://localhost:3003').replace(/\/$/, ''),
       forumUrl: process.env.FORUM_URL || 'http://localhost:8083',
       siteUrl: process.env.SITE_URL || '',
       enablePlayground: process.env.ENABLE_PLAYGROUND === 'true'
