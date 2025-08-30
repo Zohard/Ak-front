@@ -17,6 +17,11 @@ export default defineNuxtConfig({
     }
   },
   ssr: false,
+  nitro: {
+    output: {
+      dir: 'public'
+    }
+  },
   typescript: {
     strict: false,
     typeCheck: false
