@@ -28,6 +28,10 @@ export default defineNuxtConfig({
   
   // Generate config for SPA
   nitro: {
+    output: {
+      dir: '.output',
+      publicDir: '.output/public'
+    },
     prerender: {
       routes: ['/']
     }
