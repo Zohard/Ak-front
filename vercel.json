@@ -1,6 +1,6 @@
 {
   "buildCommand": "npm run generate",
-  "outputDirectory": ".output/public",
+  "outputDirectory": "dist",
   "framework": "nuxtjs",
   "routes": [
     {
