@@ -17,7 +17,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       // Normalize to avoid trailing slash issues in requests
-      apiBase: (process.env.API_BASE_URL || 'http://localhost:3003').replace(/\/$/, ''),
+      // Prefer same-origin in browser; use dev proxy or hosting rewrites
+      apiBase: (process.env.API_BASE_URL ?? '').replace(/\/$/, ''),
       forumUrl: process.env.FORUM_URL || 'http://localhost:8083',
       siteUrl: process.env.SITE_URL || '',
       enablePlayground: process.env.ENABLE_PLAYGROUND === 'true'
@@ -51,7 +52,14 @@ export default defineNuxtConfig({
   vite: {
     server: {
       port: 3000,
-      host: '0.0.0.0'
+      host: '0.0.0.0',
+      // Dev proxy: forward /api to local backend to avoid CORS
+      proxy: {
+        '/api': {
+          target: process.env.API_PROXY_TARGET || process.env.API_BASE_URL || 'http://localhost:3003',
+          changeOrigin: true
+        }
+      }
     }
   },
   
