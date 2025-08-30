@@ -30,7 +30,7 @@ export default defineNuxtConfig({
   nitro: {
     output: {
       dir: '.output',
-      publicDir: '.output/public'
+      publicDir: 'public'
     },
     prerender: {
       routes: ['/']

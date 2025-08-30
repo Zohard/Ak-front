@@ -6,7 +6,7 @@
     "node": "20.x"
   },
   "scripts": {
-    "build": "nuxt generate && if [ \"$VERCEL\" = \"1\" ]; then rm -rf public && cp -r .output/public public; fi",
+    "build": "nuxt generate && if [ \"$VERCEL\" = \"1\" ] && [ -d .output/public ]; then rm -rf public && cp -r .output/public public; fi",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -17,7 +17,7 @@
     "@nuxt/devtools": "latest",
     "@playwright/test": "^1.40.0",
     "@vue/test-utils": "^2.4.0",
-    "nuxt": "^3.8.0",
+    "nuxt": "^3.12.3",
     "typescript": "^5.0.0",
     "vitest": "^2.0.0",
     "vue-tsc": "^2.2.10"
@@ -35,7 +35,16 @@
     "@vueuse/core": "^10.5.0",
     "@vueuse/nuxt": "^10.5.0",
     "axios": "^1.6.7",
-    "pinia": "^3.0.3",
-    "vue": "^3.5.18"
+    "pinia": "^3.0.3"
+  }
+  ,
+  "scripts": {
+    "build": "nuxt generate && if [ \"$VERCEL\" = \"1\" ]; then rm -rf public && cp -r .output/public public; fi",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "test": "vitest",
+    "test:e2e": "playwright test",
+    "postinstall": "nuxt prepare"
   }
 }
