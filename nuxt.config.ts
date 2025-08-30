@@ -28,10 +28,7 @@ export default defineNuxtConfig({
   
   // Generate config for SPA
   nitro: {
-    output: {
-      dir: '.output',
-      publicDir: 'public'
-    },
+    preset: 'vercel',
     prerender: {
       routes: ['/']
     }
