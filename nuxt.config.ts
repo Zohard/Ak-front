@@ -22,9 +22,6 @@ export default defineNuxtConfig({
     typeCheck: false
   },
   // Removed proxy - using direct API calls with CORS
-  nitro: {
-    devProxy: {}
-  },
   devServer: {
     port: 3000,
     host: '0.0.0.0'
