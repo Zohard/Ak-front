@@ -1,0 +1,1 @@
+import{ae as o,q as r,af as n,L as c,p as l}from"./CCeOfYC8.js";const h=o(async(s,u)=>{let a,i;const e=r();if(e.isReady||(e.initializeAuth(),[a,i]=n(()=>c()),await a,i()),!!e.isAuthenticated.value){let t=s.query.redirect||"/";return typeof t=="string"&&t.startsWith("/login")&&(t="/"),l(t)}});export{h as default};

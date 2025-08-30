@@ -1,0 +1,1 @@
+import o from"./iDOQFa_p.js";import{f as t,m as r,o as m}from"./CCeOfYC8.js";import"./DQ4Pbmhs.js";import"./2MIT5xPl.js";import"./SwZ-OZp_.js";import"./B9jFdIe5.js";import"./B3ebZBhz.js";import"./DjdqfoxO.js";/* empty css        */import"./fsPbPvAk.js";import"./BAGXGExy.js";import"./C_YtV1it.js";const g=t({__name:"[slug]",setup(p){return(e,i)=>(m(),r(o))}});export{g as default};
