@@ -1,11 +1,5 @@
 {
-  "buildCommand": "npm install && npm run generate",
+  "buildCommand": "npm run generate",
   "outputDirectory": ".output/public",
-  "framework": "nuxtjs",
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ]
+  "framework": "nuxtjs"
 }
